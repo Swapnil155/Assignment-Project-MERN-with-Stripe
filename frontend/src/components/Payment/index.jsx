@@ -20,48 +20,40 @@ import {
 import axios from "axios";
 
 const CheckOut = () => {
-    // const stripe = useStripe()
+  // const stripe = useStripe()
 
-    const onSubmitHandler = async (e) => {
-        e.preventDefault()
-
-       
-    }
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+  };
   return (
     <Container className="py-6">
-      
-        <Card className="border-0 shadow px-3 py-3" style={{ width: "20rem" }}>
-          <Form onSubmit={onSubmitHandler}>
-            <FormGroup className="mb-3" controlId="formBasicNumber">
-              <FormLabel>Card Number</FormLabel>
-              <CardNumberElement />
-            </FormGroup>
-            <FormGroup className="mb-3" controlId="formBasicExpriy">
-              <FormLabel>Expiry Number</FormLabel>
-              <CardExpiryElement />
-            </FormGroup>
-            <FormGroup className="mb-3" controlId="formBasicCVC">
-              <FormLabel>CVC</FormLabel>
-              <CardCvcElement />
-            </FormGroup>
-            <Button variant="primary" type="submit">
-              Make Payment
-            </Button>
-          </Form>
-        </Card>
+      <Card className="border-0 shadow px-3 py-3" style={{ width: "20rem" }}>
+        <Form onSubmit={onSubmitHandler}>
+          <FormGroup className="mb-3" controlId="formBasicNumber">
+            <FormLabel>Card Number</FormLabel>
+            <CardNumberElement />
+          </FormGroup>
+          <FormGroup className="mb-3" controlId="formBasicExpriy">
+            <FormLabel>Expiry Number</FormLabel>
+            <CardExpiryElement />
+          </FormGroup>
+          <FormGroup className="mb-3" controlId="formBasicCVC">
+            <FormLabel>CVC</FormLabel>
+            <CardCvcElement />
+          </FormGroup>
+          <Button variant="primary" type="submit">
+            Make Payment
+          </Button>
+        </Form>
+      </Card>
     </Container>
   );
 };
 
 const Payment = () => (
-    <ElementsConsumer
-        stripe={loadStripe(
-          "pk_test_51MZrheSDSUOhX3MpsPyM1G4z4IJq5LIjpL8SYBg2FpEB9nXoQLzJh7fELcaQffdZqlbdUqMK56nnmKWen9mfhiWM00Gt1RnFeu"
-        )}
-      >
-      <CheckOut />
-    </ElementsConsumer>
-  );
-  
-export default Payment;
+  <ElementsConsumer stripe={loadStripe(process.env.REACT_APP_KEY)}>
+    <CheckOut />
+  </ElementsConsumer>
+);
 
+export default Payment;

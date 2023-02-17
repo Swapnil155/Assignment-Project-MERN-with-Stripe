@@ -11,7 +11,7 @@ import { Container } from "react-bootstrap";
 import UserServices from "../../services/user.services";
 
 const stripePromise = loadStripe(
-  "pk_test_51MZrheSDSUOhX3MpsPyM1G4z4IJq5LIjpL8SYBg2FpEB9nXoQLzJh7fELcaQffdZqlbdUqMK56nnmKWen9mfhiWM00Gt1RnFeu"
+  process.env.REACT_APP_KEY
 );
 
 const Makepayment = () => {

@@ -33,13 +33,7 @@ const MakePayment = () => {
 
   return (
     <section className="mt-3 text-block">
-      {/* <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        plan={plan}
-        price={price}
-      /> */}
-
+      
       <Payment
         show={modalShow}
         onHide={() => setModalShow(false)}
