@@ -8,6 +8,7 @@ import UserServices from "../../services/user.services"
 import { useNavigate } from "react-router-dom"
 
 function isValidUrl(string) {
+    console.log(string)
     try {
         new URL(string);
         return true;
@@ -26,7 +27,9 @@ const formSchema = Yup.object().shape({
         .test("linkedln", "Should be Linkedln origin link", function (value) {
             console.log(isValidUrl(value))
             if (isValidUrl(value)) {
-                return new URL(value).hostname === 'www.linkedin.com'
+                // console.log(value)
+                // return new URL(value).hostname === 'www.linkedin.com'
+                return new URL(value)
             };
         }),
     facebook: Yup.string()
@@ -34,10 +37,32 @@ const formSchema = Yup.object().shape({
         .max(200, "facebook url shouldn't more then 200 characters")
         .test("facebook", "Should be Facebook origin link", function (value) {
             if (isValidUrl(value)) {
-                return new URL(value).hostname === 'www.facebook.com'
+                // return new URL(value).hostname === 'www.facebook.com'
+                return new URL(value)
             };
         }),
 })
+
+const makeLinkedlnURL = (value) => {
+    const parts = value.split("/");
+    var last_value = parts.filter(Boolean).slice(-2)
+    // https://www.linkedin.com/in/swapnil-bendal/
+    let Linkedln_url = `https://www.linkedin.com/${last_value[0]}/${last_value[1]}/`
+
+    console.log(Linkedln_url);
+    return Linkedln_url
+
+}
+
+const makeFacebookURL = (value) => {
+    const parts = value.split("?");
+    var last_value = parts.filter(Boolean).slice(-1)[0]
+    // https://www.facebook.com/profile.php?id=100012556984462
+    let Facebook_URL = `https://www.facebook.com/profile.php?${last_value}`
+
+    console.log(Facebook_URL);
+    return Facebook_URL
+}
 
 const ProfileStepTwo = () => {
 
@@ -68,6 +93,10 @@ const ProfileStepTwo = () => {
     const onSubmitHandler = async (values) => {
         console.log(JSON.stringify(values, null, 3))
         console.log(user)
+        const linkedinURL = makeLinkedlnURL(values.linkedln)
+        const facebookURL = makeFacebookURL(values.facebook)
+        console.log(facebookURL, linkedinURL)
+
 
         if (user) {
             const userDetails_id = user.userDetails._id
@@ -78,8 +107,8 @@ const ProfileStepTwo = () => {
                 await UserServices.userBioOrLinks(
                     userDetails_id,
                     values.Bio,
-                    values.linkedln,
-                    values.facebook
+                    linkedinURL,
+                    facebookURL
                 ).then((res) => {
                     if (res.status === 200) {
                         setShow(true);

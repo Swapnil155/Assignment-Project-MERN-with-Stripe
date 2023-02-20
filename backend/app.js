@@ -6,7 +6,6 @@ require('./Database/DB')
 
 const userRoutes = require('./api/users/users.router')
 const paymentRouter = require('./api/payment/payment.router')
-const stripe = require('stripe')('sk_test_51MZrheSDSUOhX3Mph7iLAUxY0eLDlkmqlBhwVY1DUudQYJKEymxijQjECeY9k58iqoCUrJbemJvg8VNsS7BM3UYY00Mpt2PW5L')
 
 const app = express()
 

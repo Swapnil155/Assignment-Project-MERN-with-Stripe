@@ -85,12 +85,17 @@ const Register = () => {
   function handleInput(event) {
     setInputLocation(event.target.value);
 
+    if(event.target.value.length === 0){
+      setSuggestions([]);
+    }
+
     setSuggestions(
       data.filter((city) =>
         city.toLowerCase().startsWith(event.target.value.toLowerCase())
       )
     );
   }
+  
 
   function handleSelection(event) {
     setInputLocation(event.target.innerText);
@@ -98,7 +103,7 @@ const Register = () => {
   }
 
   const onSubmit = async (values) => {
-    setLoader(true)
+    setLoader(true);
     console.log(JSON.stringify(values, null, 2));
     console.log(inputLocation);
 
@@ -133,7 +138,7 @@ const Register = () => {
     } catch (error) {
       console.log(error.message);
     }
-    setLoader(false)
+    setLoader(false);
   };
 
   return (
@@ -228,6 +233,7 @@ const Register = () => {
                       type="text"
                       value={inputLocation}
                       onInput={handleInput}
+                      
                       {...register("location")}
                       required="required"
                     />
