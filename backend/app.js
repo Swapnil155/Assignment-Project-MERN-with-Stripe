@@ -13,7 +13,6 @@ app.use(cors())
 
 app.use(express.json());
 
-
 app.use('/api/user/', userRoutes)
 app.use('/uploads', express.static('uploads'))
 app.use('/api/payment/', paymentRouter)
