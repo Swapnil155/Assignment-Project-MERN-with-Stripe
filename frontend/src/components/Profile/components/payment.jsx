@@ -39,9 +39,7 @@ const CARD_ELEMENT_OPTIONS = {
     },
   },
 };
-const stripePromise = loadStripe(
-  process.env.REACT_APP_KEY
-);
+const stripePromise = loadStripe(process.env.REACT_APP_KEY);
 
 const MyVerticallyCenteredModal = (props) => {
   const navigate = useNavigate();
@@ -112,13 +110,13 @@ const MyVerticallyCenteredModal = (props) => {
 
               if (res.status === 200) {
                 const client_secret = res.data.client_secret;
-                const confirmPayment = await stripe.confirmCardPayment(
+                const { paymentIntent } = await stripe.confirmCardPayment(
                   client_secret
                 );
 
-                console.log(`confirmPayment :`,confirmPayment)
+                console.log(`confirmPayment :`, paymentIntent);
 
-                if (confirmPayment.paymentIntent.status === "succeeded") {
+                if (paymentIntent.status === "succeeded") {
                   // console.log(res.data.paymentId._id)
                   const id_paymment = res.data.paymentId._id;
                   await UserServices.UpdatePaymentStatus(
