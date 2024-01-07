@@ -19,7 +19,7 @@ async function sendEmailOTP(email, otp) {
     // secure: true,
     auth: {
       user: "swapnilbendal155@gmail.com",
-      pass: "xsmtpsib-cc1e7344b6461fc1bae2ee9e80d804f9b90cd76e1c581bb84ec779b0d7d9dbde-5tAQ9NWg6mv2OUKh",
+      pass: "xsmtpsib-cc1e7344b6461fc1bae2ee9e80d804f9b90cd76e1c581bb84ec779b0d7d9dbde-wCKXNGUsxSc37mg5",
     },
   });
 
