@@ -32,7 +32,7 @@ async function sendEmailOTP(email, otp) {
 
   transporter.sendMail(details, (err) => {
     if (err) {
-      console.log("it has an err", err);
+      console.log("it has an err", err.message);
     } else {
       console.log("email send");
       return `Email send`;
@@ -73,6 +73,8 @@ module.exports = {
         const resultDetails = await userDetails.save();
 
         const otp = generateOTP();
+        
+        console.log(`Register OTP:` + otp);
         const sendOtpInEmail = sendEmailOTP(email, otp);
 
         const hashOtp = await bcrypt.hash(otp, salt);
@@ -235,7 +237,7 @@ module.exports = {
 
       if (isExist) {
         const otp = generateOTP();
-
+        console.log(`Resend OTP:` + otp);
         const salt = await bcrypt.genSalt(10);
         const hashOtp = await bcrypt.hash(otp, salt);
 
